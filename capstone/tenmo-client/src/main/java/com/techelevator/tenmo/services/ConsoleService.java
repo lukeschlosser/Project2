@@ -2,11 +2,12 @@ package com.techelevator.tenmo.services;
 
 
 import com.techelevator.tenmo.model.UserCredentials;
-
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+
 public class ConsoleService {
+
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -21,11 +22,13 @@ public class ConsoleService {
         return menuSelection;
     }
 
+
     public void printGreeting() {
         System.out.println("*********************");
         System.out.println("* Welcome to TEnmo! *");
         System.out.println("*********************");
     }
+
 
     public void printLoginMenu() {
         System.out.println();
@@ -37,13 +40,18 @@ public class ConsoleService {
 
     public void printMainMenu() {
         System.out.println();
+        //System.out.println("Welcome " + getUsername);
+        //System.out.println("Your current balance it: " + getBalance);
+        //System.out.println();
         System.out.println("1: View your current balance");
         System.out.println("2: View your past transfers");
-        System.out.println("3: View your pending requests");
+        //System.out.println("3: View your pending requests");
         System.out.println("4: Send TE bucks");
         System.out.println("5: Request TE bucks");
         System.out.println("0: Exit");
         System.out.println();
+
+
     }
 
     public UserCredentials promptForCredentials() {
