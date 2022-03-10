@@ -1,6 +1,5 @@
 package com.techelevator.tenmo.services;
 
-import com.techelevator.tenmo.model.Account;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -11,7 +10,7 @@ public class RestAccountSvcs implements AccountSvcs {
     private RestTemplate restTemplate = new RestTemplate();
 
 
-    @Override
+  /*  @Override
     public Account getAccount(){                                                //TODO    add param id
         Account account = restTemplate.getForObject(API_URL, Account.class);
         return account;
@@ -22,7 +21,7 @@ public class RestAccountSvcs implements AccountSvcs {
     public Account updateAccount(){                                                //TODO    add param id
         Account account = restTemplate.getForObject(API_URL, Account.class);
         return account;
-    }
+    }*/
 
 
 }

@@ -1,7 +1,6 @@
 package com.techelevator.tenmo.services;
 
 
-import com.techelevator.tenmo.model.Transfer;
 import org.springframework.web.client.RestTemplate;
 
 //@Component
@@ -11,18 +10,18 @@ public class RestTransferSvcs implements TransferSvcs {
     private RestTemplate restTemplate = new RestTemplate();
 
 
-    @Override
-    public Transfer sendTransfer(){                                                //TODO    add param id
-        Transfer transfer = restTemplate.getForObject(API_URL, Transfer.class);
-        return transfer;
-    }
-
-
-    @Override
-    public Transfer acceptTransfer(){                                            //TODO    add param transfer
-        Transfer transfer = restTemplate.getForObject(API_URL, Transfer.class);
-        return transfer;
-    }
+//    @Override
+//    public Transfer sendTransfer(){                                                //TODO    add param id
+//        Transfer transfer = restTemplate.getForObject(API_URL, Transfer.class);
+//        return transfer;
+//    }
+//
+//
+//    @Override
+//    public Transfer acceptTransfer(){                                            //TODO    add param transfer
+//        Transfer transfer = restTemplate.getForObject(API_URL, Transfer.class);
+//        return transfer;
+//    }
 
 
 }
