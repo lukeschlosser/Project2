@@ -9,7 +9,7 @@ public interface AccountDao {
 
     List<Account> getAll();
 
-    List<Account> getAllAccountsByUserId();
+    List<Account> getAllAccountsByUserId(int userId);
 
     Account getAccount(int userId);
 

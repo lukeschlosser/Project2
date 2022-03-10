@@ -1,13 +1,24 @@
 package com.techelevator.tenmo.model;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
 public class Transfer {
+
+    @Positive(message = "Transfer Id cannot be empty")
     private int transferId;
+    @Positive(message = "No one is listed as the transfer sender")
     private int senderId;
+    @PositiveOrZero(message = "No one is listed as the recipient sender")
     private int recipientId;
+    @DecimalMin(value= "0.01", message = "Transfer Amount  must be greater than $0.01")
     private BigDecimal transferAmt;
+    @Positive(message = "Transfer Type  must be a positive value")
     private int TransferType;
+    @Positive(message = "Transfer Status Id must be a positive value")
     private int TransferStatusId;
 
     public Transfer() {}

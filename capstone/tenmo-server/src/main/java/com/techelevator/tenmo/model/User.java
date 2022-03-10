@@ -1,14 +1,21 @@
 package com.techelevator.tenmo.model;
 
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 public class User {
 
+   @Positive(message = "Id must be a positive value")
    private Long id;
+   @NotBlank(message = "Transfer Id must contain a value")
    private String username;
+   @NotBlank(message = "Transfer Id must contain a value")
    private String password;
+   @AssertFalse(message = "Activation status defaults to false")
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
 
