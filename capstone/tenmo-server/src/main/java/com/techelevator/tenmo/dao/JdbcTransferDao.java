@@ -14,6 +14,14 @@ import java.util.List;
 public class JdbcTransferDao implements TransferDao{
 
     private JdbcTemplate jdbcTemplate;
+    //transfer_type_id
+    private static final int REQUEST = 1;
+    private static final int SEND = 2;
+    //transfer_status_id
+    private static final int PENDING = 1;
+    private static final int APPROVED = 2;
+    private static final int REJECTED = 3;
+
 
     public JdbcTransferDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -74,11 +82,13 @@ public class JdbcTransferDao implements TransferDao{
 
     @Override
     public Transfer logTransfer(Transfer transfer) {
-//        String sql = "INSERT INTO transfer(transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES(?, ?, ?, ?, ?);";
-//        return jdbcTemplate.update(sql, Transfer.class);
-               /* transfer.getTransferType(), transfer.getTransferStatusId(), transfer.getTransferAmt(),
-                transfer.getRecipientId(), transfer.getSenderId()*/
-        return transfer;
+        Transfer transfer1 = new Transfer();
+        String sql = "INSERT INTO transfer(transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES(?, ?, ?, ?, ?) RETURNING transfer_id;";
+        int newTransferId = jdbcTemplate.update(sql, transfer.getTransferType(), transfer.getTransferStatusId(), transfer.getTransferAmt(),
+                transfer.getRecipientId(), transfer.getSenderId());
+        transfer1 = getTransfer(newTransferId);
+        return transfer1;
+
     }
 
 

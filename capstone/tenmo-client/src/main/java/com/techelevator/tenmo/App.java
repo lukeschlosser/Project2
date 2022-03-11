@@ -105,8 +105,7 @@ public class App {
 	}
 
 	private void sendBucks() {
-		// TODO Auto-generated method stub
-//        System.out.println(restAccSvcs.updateAccount(1001));
+       // System.out.println(restTransferSvcs.createTransfer();
 	}
 
 // BONUS

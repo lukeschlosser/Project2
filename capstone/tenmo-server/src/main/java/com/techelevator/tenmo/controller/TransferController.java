@@ -38,7 +38,7 @@ public class TransferController {
 
     @PreAuthorize("permitAll")
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/transfer/send", method = RequestMethod.POST)
+    @RequestMapping(value = "/transfer/", method = RequestMethod.POST)
     public Transfer create(@Valid @RequestBody Transfer transfer){
         return transferDao.logTransfer(transfer);
     }

@@ -71,6 +71,7 @@ public class JdbcAccountDao implements AccountDao{
         return accounts;
     }
 
+    //TODO add single getAccount
 
     @Override
     public List<Account> getAllAccountsByUserId(int userId) {

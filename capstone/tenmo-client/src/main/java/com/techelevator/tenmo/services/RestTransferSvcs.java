@@ -17,7 +17,7 @@ import java.util.List;
 //@Component
 public class RestTransferSvcs implements TransferSvcs {
 
-    private static final String API_BASE_URL = "http://localhost:8080";                                     //TODO
+    private static final String API_BASE_URL = "http://localhost:8080";
     private RestTemplate restTemplate = new RestTemplate();
 
     @Override
