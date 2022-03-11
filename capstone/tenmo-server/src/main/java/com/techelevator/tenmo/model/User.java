@@ -10,7 +10,7 @@ import java.util.Set;
 public class User {
 
    @Positive(message = "Id must be a positive value")
-   private Long id;
+   private int id;
    @NotBlank(message = "Transfer Id must contain a value")
    private String username;
    @NotBlank(message = "Transfer Id must contain a value")
@@ -21,18 +21,18 @@ public class User {
 
    public User() { }
 
-   public User(Long id, String username, String password, String authorities) {
+   public User(int id, String username, String password, String authorities) {
       this.id = id;
       this.username = username;
       this.password = password;
       this.activated = true;
    }
 
-   public Long getId() {
+   public int getId() {
       return id;
    }
 
-   public void setId(Long id) {
+   public void setId(int id) {
       this.id = id;
    }
 

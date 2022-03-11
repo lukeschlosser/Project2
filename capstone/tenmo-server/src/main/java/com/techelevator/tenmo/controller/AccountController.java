@@ -15,9 +15,9 @@ import java.security.Principal;
 import java.util.List;
 
 
-//@RestController
+@RestController
 //@RequestMapping("/account")
-//@PreAuthorize(("isAuthenticated()"))
+@PreAuthorize(("isAuthenticated()"))
 public class AccountController {
 
     private AccountDao accountDao;
@@ -29,17 +29,17 @@ public class AccountController {
         this.userDao = userDao;
         this.transferDao = transferDao;
     }
-//        @RequestMapping( value = "/balance", method = RequestMethod.GET)
-//                public BigDecimal getBalance(Principal principal){
-//            Long userId = getCurrentUserId(principal);
-//            return accountDao.getAccountByUserId(userId).getBalance();
-//        }
-//        @RequestMapping(value = "/transfers", method = RequestMethod.GET)
-//        public List<Transfer> getTransfer(Principal principal){
-//        return transferDao.getTransferForUser(getCurrentUserId(principal));
-//        }
+        @RequestMapping( value = "/account/balance", method = RequestMethod.GET)
+                public BigDecimal getBalance(Principal principal){
+            int userId = getCurrentUserId(principal);
+            return accountDao.getBalance(userId);
+        }
+        @RequestMapping(value = "/transfer", method = RequestMethod.GET)
+        public List<Transfer> getTransfer(Principal principal){
+        return transferDao.getTransferHistory();
+        }
 
-    private Long getCurrentUserId(Principal principal){
+    private int getCurrentUserId(Principal principal){
         return userDao.findByUsername(principal.getName()).getId();
     }
 
