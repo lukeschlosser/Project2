@@ -19,7 +19,7 @@ public interface TransferDao {
     List<Transfer> getTransferHistoryByTransferId(int transferId);
 
 
-    boolean logTransfer(Transfer transfer);
+    Transfer logTransfer(Transfer transfer);
 
 
 }

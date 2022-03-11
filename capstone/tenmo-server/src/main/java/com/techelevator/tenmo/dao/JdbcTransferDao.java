@@ -73,11 +73,12 @@ public class JdbcTransferDao implements TransferDao{
 
 
     @Override
-    public boolean logTransfer(Transfer transfer) {
-
-        String sql = "INSERT INTO transfer(transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES(?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, transfer.getTransferType(), transfer.getTransferStatusId(), transfer.getTransferAmt(),
-                transfer.getRecipientId(), transfer.getSenderId()) == 1;
+    public Transfer logTransfer(Transfer transfer) {
+//        String sql = "INSERT INTO transfer(transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES(?, ?, ?, ?, ?);";
+//        return jdbcTemplate.update(sql, Transfer.class);
+               /* transfer.getTransferType(), transfer.getTransferStatusId(), transfer.getTransferAmt(),
+                transfer.getRecipientId(), transfer.getSenderId()*/
+        return transfer;
     }
 
 
