@@ -40,12 +40,9 @@ public class ConsoleService {
 
     public void printMainMenu() {
         System.out.println();
-        //System.out.println("Welcome " + getUsername);
-        //System.out.println("Your current balance it: " + getBalance);
-        //System.out.println();
         System.out.println("1: View your current balance");
         System.out.println("2: View your past transfers");
-        //System.out.println("3: View your pending requests");
+        System.out.println("3: View your pending requests");
         System.out.println("4: Send TE bucks");
         System.out.println("5: Request TE bucks");
         System.out.println("0: Exit");
@@ -95,6 +92,12 @@ public class ConsoleService {
 
     public void printErrorMessage() {
         System.out.println("An error occurred. Check the log for details.");
+    }
+
+    public void displaySelecTransRecip(){                              //TODO OPTION 4 replace N/A with getUserFromTranferId(nextline())
+        System.out.println();
+        System.out.println("You have selected " + "N/A" + " as the recipient for this transaction.");
+        System.out.println();
     }
 
 }

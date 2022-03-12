@@ -14,7 +14,7 @@ public class RestUserSvcs {
     public User[] listUsernameAndId(){
         User[] users = null;
         try {
-            users = restTemplate.getForObject(API_BASE_URL + "user", User[].class);
+            users = restTemplate.getForObject(API_BASE_URL + "/user", User[].class);
         } catch (RestClientResponseException e) {
             BasicLogger.log(e.getRawStatusCode() + " : " + e.getStatusText());
         } catch (ResourceAccessException e) {

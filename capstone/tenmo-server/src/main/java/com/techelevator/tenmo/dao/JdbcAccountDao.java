@@ -19,6 +19,18 @@ public class JdbcAccountDao implements AccountDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
+    public BigDecimal getBalance(int accountId) {
+        BigDecimal balance = null;
+        String sql = "SELECT balance FROM account WHERE account_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, accountId);
+
+        if(results.next()){
+            balance = mapRowToAccount(results).getBalance();
+        }
+        return balance;
+    }
+
 
     @Override
     public Account getAccount(int userId) {
@@ -47,19 +59,6 @@ public class JdbcAccountDao implements AccountDao{
 
 
     @Override
-    public BigDecimal getBalance(int accountId) {
-        BigDecimal balance = null;
-        String sql = "SELECT balance FROM account WHERE account_id = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, accountId);
-
-        if(results.next()){
-            balance = mapRowToAccount(results).getBalance();
-        }
-        return balance;
-    }
-
-
-    @Override
     public List<Account> getAll() {
         List<Account> accounts = new ArrayList<>();
         String sql = "SELECT account_id, user_id, balance FROM account;";
@@ -71,7 +70,6 @@ public class JdbcAccountDao implements AccountDao{
         return accounts;
     }
 
-    //TODO add single getAccount
 
     @Override
     public List<Account> getAllAccountsByUserId(int userId) {

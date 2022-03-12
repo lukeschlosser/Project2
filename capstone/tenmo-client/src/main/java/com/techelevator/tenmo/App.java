@@ -30,6 +30,8 @@ public class App {
             mainMenu();
         }
     }
+
+
     private void loginMenu() {
         int menuSelection = -1;
         while (menuSelection != 0 && currentUser == null) {
@@ -46,6 +48,7 @@ public class App {
         }
     }
 
+
     private void handleRegister() {
         System.out.println("Please register a new user account");
         UserCredentials credentials = consoleService.promptForCredentials();
@@ -56,6 +59,7 @@ public class App {
         }
     }
 
+
     private void handleLogin() {
         UserCredentials credentials = consoleService.promptForCredentials();
         currentUser = authenticationService.login(credentials);
@@ -64,9 +68,11 @@ public class App {
         }
     }
 
+
     private void mainMenu() {
         int menuSelection = -1;
         while (menuSelection != 0) {
+            printMMAddOn();
             consoleService.printMainMenu();
             menuSelection = consoleService.promptForMenuSelection("Please choose an option: ");
             if (menuSelection == 1) {
@@ -88,50 +94,91 @@ public class App {
         }
     }
 
-	private void viewCurrentBalance() {
-        //takes the current user and uses their userId to get a current balance
-        Long user = currentUser.getUser().getId();
-        int i = user.intValue();
-        System.out.println("Your current account balance is: " + restAccSvcs.getBalance(i)); //current balance method still shows as null
 
+	private void viewCurrentBalance() {                                      //current balance method still shows as null
+        displayAccountMenu();
+        System.out.println("Welcome to Your Tenmo Account " + displayUser() + ", id:" + userAsIntFromLong());
+        System.out.println();
+        System.out.println("Your current account balance is: " + restAccSvcs.getBalance(userAsIntFromLong()));
 
 	}
 
-	private void viewTransferHistory() {
-        //takes the current user and uses their userId to get a transfer history
-        Long user = currentUser.getUser().getId();
-        int i = user.intValue();
-        System.out.println("Your Transfer History: " + restTransferSvcs.getTransferHistory(i));
+
+	private void viewTransferHistory() {                             //TODO given userId return list of transfer history
+        displayTransferMenu();
+        System.out.println("Your Transfer History: " + restTransferSvcs.getTransferHistory(userAsIntFromLong()));
     }
 
-	private void viewPendingRequests() {
-		// TODO Auto-generated method stub
-        System.out.println("Your pending requests: "); //TODO need to implement a getTransferStatusByUserId I think?
+
+	private void viewPendingRequests() {                        // TODO Auto-generated method stub getTransferStatusByUserId
+        displayTransferMenu();
+        System.out.println("Your pending requests: ");
 	}
 
-	private void sendBucks() {
 
-        //list of users and their associated userId
-        System.out.println(restUserSvcs.listUsernameAndId());    //TODO
-                                                                 // this method isn't connected to server yet and there might be
-                                                                 // a better way to list them this is just a start because we need to
-                                                                 // show a list of the users and their id's so the person knows what to
-                                                                 // type for the next prompts below
-
-        Long user = currentUser.getUser().getId(); //the below code doesn't quite do what I want but it's a start.
-        int i = user.intValue();
+	private void sendBucks() {                                 //TODO connect to server. fine tune
+        displayTransferMenu();
+        System.out.println("Who would you like to send TE Bucks " + displayUser() + "?");
+        System.out.println("Here are the available users: ");
         System.out.println();
-        String sendingBucksTo = consoleService.promptForString("Please enter the userId of who you would like to send the TE Bucks: ");
-        System.out.println(sendingBucksTo);
-        BigDecimal bigDecimalFromUser = consoleService.promptForBigDecimal("Please enter the amount of TE Bucks you would like to send: ");
-        System.out.println(bigDecimalFromUser);
+        System.out.println(restUserSvcs.listUsernameAndId());
+        System.out.println();
+        consoleService.promptForString("Please enter the userId of who you would like to send the TE Bucks: ");
+        consoleService.displaySelecTransRecip();
+        consoleService.promptForBigDecimal("Please enter the amount of TE Bucks you would like to send: ");
 
 	}
+
 
 // BONUS
 	private void requestBucks() {
-
-        System.out.println("This feature is not implemented yet. Please check back in the future!");
+        displayTransferMenu();
+        System.out.println("Who would you like to request TE Bucks from " + displayUser() + "?");
+        System.out.println("Here are the available users?");
+        System.out.println();
+        System.out.println(restUserSvcs.listUsernameAndId());
+        System.out.println();
+        System.out.println();
+        System.out.println("************ಠ╭╮ಠ*************");
+        System.out.println("This feature is not implemented yet.");
+        System.out.println("*Please check back in the future!*");
 	}
+
+    private int userAsIntFromLong(){
+        Long user = currentUser.getUser().getId();
+        int i = user.intValue();
+        return i;
+    }
+
+    private void spacer(){
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    private void printMMAddOn() {
+        spacer();
+        System.out.println("You are logged in as Tenmo User");
+        System.out.println("********" + displayUser() + " id: " + currentUser.getUser().getId() + "********");
+        System.out.println("*********welcome*back*********");
+        System.out.println();
+    }
+
+    private String displayUser() {
+    return currentUser.getUser().getUsername();
+    }
+
+    private void displayAccountMenu(){
+        spacer();
+        System.out.println("******ACCOUNT*MENU******");
+        System.out.println();
+    }
+
+    private void displayTransferMenu(){
+        spacer();
+        System.out.println("******TRANSFER*MENU******");
+        System.out.println();
+    }
 
 }
