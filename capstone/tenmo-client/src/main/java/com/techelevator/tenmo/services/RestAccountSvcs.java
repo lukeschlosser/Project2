@@ -35,7 +35,6 @@ public class RestAccountSvcs implements AccountSvcs {
         BigDecimal balance = null;
 
         try {
-            System.out.println("hello");
             balance = restTemplate.getForObject(API_BASE_URL + "/account/balance" + accountId, Account.class).getBalance();
         } catch (RestClientResponseException rcre) {
             BasicLogger.log(rcre.getRawStatusCode() + " : " + rcre.getStatusText() );
@@ -94,5 +93,7 @@ public class RestAccountSvcs implements AccountSvcs {
         }
         return returnedAccount;
     }
+
+
 
 }

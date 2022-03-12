@@ -2,10 +2,9 @@ package com.techelevator.tenmo;
 
 import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.UserCredentials;
-import com.techelevator.tenmo.services.AuthenticationService;
-import com.techelevator.tenmo.services.ConsoleService;
-import com.techelevator.tenmo.services.RestAccountSvcs;
-import com.techelevator.tenmo.services.RestTransferSvcs;
+import com.techelevator.tenmo.services.*;
+
+import java.math.BigDecimal;
 
 public class App {
 
@@ -15,7 +14,7 @@ public class App {
     private final AuthenticationService authenticationService = new AuthenticationService(API_BASE_URL);
     private final RestAccountSvcs restAccSvcs = new RestAccountSvcs();
     private final RestTransferSvcs restTransferSvcs = new RestTransferSvcs();
-
+    private final RestUserSvcs restUserSvcs = new RestUserSvcs();
 
     private AuthenticatedUser currentUser;
 
@@ -90,28 +89,49 @@ public class App {
     }
 
 	private void viewCurrentBalance() {
-		// TODO Auto-generated method stub
-        System.out.println(restAccSvcs.getBalance(1001));                   //TODO hardcoded test ID
+        //takes the current user and uses their userId to get a current balance
+        Long user = currentUser.getUser().getId();
+        int i = user.intValue();
+        System.out.println("Your current account balance is: " + restAccSvcs.getBalance(i)); //current balance method still shows as null
+
+
 	}
 
 	private void viewTransferHistory() {
-		// TODO Auto-generated method stub
-        System.out.println(restTransferSvcs.getTransferHistory(1001));
+        //takes the current user and uses their userId to get a transfer history
+        Long user = currentUser.getUser().getId();
+        int i = user.intValue();
+        System.out.println("Your Transfer History: " + restTransferSvcs.getTransferHistory(i));
     }
 
 	private void viewPendingRequests() {
 		// TODO Auto-generated method stub
-//        System.out.println(restTransferSvcs.getTransferHistoryByStatus(1001));
+        System.out.println("Your pending requests: "); //TODO need to implement a getTransferStatusByUserId I think?
 	}
 
 	private void sendBucks() {
-       // System.out.println(restTransferSvcs.createTransfer();
+
+        //list of users and their associated userId
+        System.out.println(restUserSvcs.listUsernameAndId());    //TODO
+                                                                 // this method isn't connected to server yet and there might be
+                                                                 // a better way to list them this is just a start because we need to
+                                                                 // show a list of the users and their id's so the person knows what to
+                                                                 // type for the next prompts below
+
+        Long user = currentUser.getUser().getId(); //the below code doesn't quite do what I want but it's a start.
+        int i = user.intValue();
+        System.out.println();
+        String sendingBucksTo = consoleService.promptForString("Please enter the userId of who you would like to send the TE Bucks: ");
+        System.out.println(sendingBucksTo);
+        BigDecimal bigDecimalFromUser = consoleService.promptForBigDecimal("Please enter the amount of TE Bucks you would like to send: ");
+        System.out.println(bigDecimalFromUser);
+
 	}
 
 // BONUS
 	private void requestBucks() {
-		// TODO Auto-generated method stub
-//        System.out.println(restTransferSvcs.createTransfer(1001));
+
+        System.out.println("This feature is not implemented yet. Please check back in the future!");
 	}
 
 }
