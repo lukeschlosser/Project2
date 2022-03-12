@@ -1,6 +1,7 @@
 package com.techelevator.tenmo;
 
 import com.techelevator.tenmo.model.AuthenticatedUser;
+import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.*;
 
@@ -116,12 +117,13 @@ public class App {
 	}
 
 
-	private void sendBucks() {                                 //TODO connect to server. fine tune
+	private void sendBucks() {
         displayTransferMenu();
         System.out.println("Who would you like to send TE Bucks " + displayUser() + "?");
         System.out.println("Here are the available users: ");
         System.out.println();
-        System.out.println(restUserSvcs.listUsernameAndId(currentUser));
+        displayListUsernameAndId();
+//        System.out.println(restUserSvcs.listUsernameAndId(currentUser));
         System.out.println();
         consoleService.promptForString("Please enter the userId of who you would like to send the TE Bucks: ");
         consoleService.displaySelecTransRecip();
@@ -136,7 +138,7 @@ public class App {
         System.out.println("Who would you like to request TE Bucks from " + displayUser() + "?");
         System.out.println("Here are the available users?");
         System.out.println();
-        System.out.println(restUserSvcs.listUsernameAndId(currentUser));
+        displayListUsernameAndId();
         System.out.println();
         System.out.println();
         System.out.println("************ಠ╭╮ಠ*************");
@@ -145,8 +147,8 @@ public class App {
 	}
 
     private int userAsIntFromLong(){
-        Long user = currentUser.getUser().getId();
-        int i = user.intValue();
+        int user = currentUser.getUser().getId();
+        int i = user;
         return i;
     }
 
@@ -181,6 +183,13 @@ public class App {
         System.out.println();
     }
 
+    public void displayListUsernameAndId() {
 
+        for (User user : restUserSvcs.listUsernameAndId(currentUser)){
+            System.out.println("username: " + user.getUsername() + ", account id:" + user.getId());
+        }
+
+
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.techelevator.tenmo.services;
 
 
+import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.model.UserCredentials;
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -95,9 +96,17 @@ public class ConsoleService {
     }
 
     public void displaySelecTransRecip(){                              //TODO OPTION 4 replace N/A with getUserFromTranferId(nextline())
+        String selectedId = scanner.nextLine();
+
+//        for (User user : restUserSvcs.listUsernameAndId(currentUser)){
+//        if (selectedId == user.getId()){
+//
+//        }
+//        }
         System.out.println();
-        System.out.println("You have selected " + "N/A" + " as the recipient for this transaction.");
+        System.out.println("You have selected username:" + selectedId + " as the recipient for this transaction.");
         System.out.println();
     }
 
-}
+
+    }
