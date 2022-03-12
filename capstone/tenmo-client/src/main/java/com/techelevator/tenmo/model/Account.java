@@ -15,9 +15,7 @@ public class Account {
     private int userId;
 
 
-    public Account() {
-    }
-
+    public Account() {}
 
     public Account(int accountId) {
         this.accountId = accountId;

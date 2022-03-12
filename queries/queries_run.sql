@@ -74,34 +74,19 @@ INSERT INTO transfer_type (transfer_type_desc) VALUES ('Request');
 INSERT INTO transfer_type (transfer_type_desc) VALUES ('Send');
 
 INSERT INTO account (account_id, user_id, balance) VALUES (DEFAULT, DEFAULT, 2000.00);
-INSERT INTO account VALUES() RETURNING account;
-INSERT INTO account VALUES() RETURNING account;
-INSERT INTO account VALUES() RETURNING account;
-INSERT INTO account VALUES() RETURNING account;
+
 
 INSERT INTO tenmo_user VALUES() RETURNING tenmo_user;
-INSERT INTO tenmo_user VALUES() RETURNING tenmo_user;
-INSERT INTO tenmo_user VALUES() RETURNING tenmo_user;
-INSERT INTO tenmo_user VALUES() RETURNING tenmo_user;
-INSERT INTO tenmo_user VALUES() RETURNING tenmo_user;
+
 
 INSERT INTO transfer VALUES() RETURNING transfer;
-INSERT INTO transfer VALUES() RETURNING transfer;
-INSERT INTO transfer VALUES() RETURNING transfer;
-INSERT INTO transfer VALUES() RETURNING transfer;
-INSERT INTO transfer VALUES() RETURNING transfer;
+
 
 INSERT INTO transfer_status VALUES() RETURNING transfer_status;
-INSERT INTO transfer_status VALUES() RETURNING transfer_status;
-INSERT INTO transfer_status VALUES() RETURNING transfer_status;
-INSERT INTO transfer_status VALUES() RETURNING transfer_status;
-INSERT INTO transfer_status VALUES() RETURNING transfer_status;
+
 
 INSERT INTO transfer_type VALUES() RETURNING transfer_type;
-INSERT INTO transfer_type VALUES() RETURNING transfer_type;
-INSERT INTO transfer_type VALUES() RETURNING transfer_type;
-INSERT INTO transfer_type VALUES() RETURNING transfer_type;
-INSERT INTO transfer_type VALUES() RETURNING transfer_type;
+
 
 
 ROLLBACK;

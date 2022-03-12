@@ -23,29 +23,27 @@ public class TransferController {
         this.transferDao = transferDao;
     }
 
-    @PreAuthorize("permitAll")
-    @RequestMapping(value = "/transfer", method = RequestMethod.GET)
-    public List<Transfer> getTransfer(Principal principal){
-
-        return transferDao.getTransferHistory();
+//    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/transfer", method = RequestMethod.GET)
+    public List<Transfer> getTransfer(@PathVariable int accountId){                 //TODO research Principal principal & Exception or change to path
+        return transferDao.getTransferHistory(accountId);
     }
 
-    @PreAuthorize("permitAll")
+//    @PreAuthorize("permitAll")
     @RequestMapping(value = "/transfer/{id}", method = RequestMethod.GET)
-    public List<Transfer> getTransferHistoryByStatus(int transferId){
+    public List<Transfer> getTransferHistoryByStatus(@PathVariable int transferId){
         return transferDao.getTransferHistoryByTransferId(transferId);
     }
 
-    @PreAuthorize("permitAll")
+//    @PreAuthorize("permitAll")
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/transfer/", method = RequestMethod.POST)
+    @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     public Transfer create(@Valid @RequestBody Transfer transfer){
         return transferDao.logTransfer(transfer);
     }
 
 
     private int getCurrentUserId(Principal principal){
-
         return userDao.findByUsername(principal.getName()).getId();
     }
 

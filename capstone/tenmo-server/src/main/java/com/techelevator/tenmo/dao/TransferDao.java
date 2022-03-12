@@ -13,7 +13,7 @@ public interface TransferDao {
     boolean getTransferStatus(int transferId);
 
 
-    List<Transfer> getTransferHistory();
+    List<Transfer> getTransferHistory(int accountId);
 
 
     List<Transfer> getTransferHistoryByTransferId(int transferId);

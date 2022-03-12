@@ -6,6 +6,8 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 public class RestUserSvcs {
 
     private static final String API_BASE_URL = "http://localhost:8080";

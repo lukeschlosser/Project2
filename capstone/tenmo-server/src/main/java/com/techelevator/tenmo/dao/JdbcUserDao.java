@@ -34,9 +34,9 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT user_id, username, password_hash FROM tenmo_user;";
+        String sql = "SELECT user_id, username, password_hash FROM tenmo_user;";        //TODO
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()) {
             User user = mapRowToUser(results);
@@ -57,8 +57,6 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public boolean create(String username, String password) {
-
-        // create user
         String sql = "INSERT INTO tenmo_user (username, password_hash) VALUES (?, ?) RETURNING user_id";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         Integer newUserId;
@@ -68,7 +66,6 @@ public class JdbcUserDao implements UserDao {
             return false;
         }
 
-        // create account
         sql = "INSERT INTO account (user_id, balance) values(?, ?)";
         try {
             jdbcTemplate.update(sql, newUserId, STARTING_BALANCE);

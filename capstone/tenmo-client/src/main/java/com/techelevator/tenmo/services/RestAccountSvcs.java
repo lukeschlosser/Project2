@@ -1,10 +1,10 @@
 package com.techelevator.tenmo.services;
 
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.AuthenticatedUser;
+import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.util.BasicLogger;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
@@ -31,11 +31,15 @@ public class RestAccountSvcs implements AccountSvcs {
     }
 
 
-    public BigDecimal getBalance(int accountId){
+    public BigDecimal getBalance(AuthenticatedUser user){
+        HttpEntity<AuthenticatedUser> entity = createCredentialsEntity(user);
+
         BigDecimal balance = null;
 
         try {
-            balance = restTemplate.getForObject(API_BASE_URL + "/account/balance" + accountId, Account.class).getBalance();
+            ResponseEntity<Account> response = restTemplate.exchange(API_BASE_URL + "/account/balance/"
+                    + user.getUser().getId(), HttpMethod.GET, entity, Account.class);
+            balance = response.getBody().getBalance();
         } catch (RestClientResponseException rcre) {
             BasicLogger.log(rcre.getRawStatusCode() + " : " + rcre.getStatusText() );
         } catch (ResourceAccessException rae) {
@@ -43,6 +47,11 @@ public class RestAccountSvcs implements AccountSvcs {
         }   return balance;
     }
 
+    private HttpEntity<AuthenticatedUser> createCredentialsEntity(AuthenticatedUser user) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new HttpEntity<>(user, headers);
+    }
 
     public boolean updateAccount(Account newAccount){
         HttpHeaders headers = new HttpHeaders();
@@ -59,23 +68,6 @@ public class RestAccountSvcs implements AccountSvcs {
             BasicLogger.log(rae.getMessage());
         } return result;
     }
-
-
-//    public boolean updateAccount(int accoundId){                                 //TODO  test uopdate with diff Parameters
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        HttpEntity<Account> entity = new HttpEntity<>(accountId, headers);
-//        boolean result = false;
-//
-//        try {
-//            restTemplate.put(API_BASE_URL + "/account/" + accountId, entity);
-//            result = true;
-//        } catch (RestClientResponseException rcre) {
-//            BasicLogger.log(rcre.getRawStatusCode() + " : " + rcre.getStatusText() );
-//        } catch (ResourceAccessException rae) {
-//            BasicLogger.log(rae.getMessage());
-//        } return result;
-//    }
 
 
     public Account createAccount(Account newAccount) {

@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +14,10 @@ import java.util.List;
 public class JdbcTransferDao implements TransferDao{
 
     private JdbcTemplate jdbcTemplate;
-    //transfer_type_id
+                                                                                          //TODO transfer_type_id
     private static final int REQUEST = 1;
     private static final int SEND = 2;
-    //transfer_status_id
+                                                                                          //TODO transfer_status_id
     private static final int PENDING = 1;
     private static final int APPROVED = 2;
     private static final int REJECTED = 3;
@@ -42,9 +42,9 @@ public class JdbcTransferDao implements TransferDao{
 
 
     @Override
-    public List<Transfer> getTransferHistory() {
+    public List<Transfer> getTransferHistory(int accountId) {
         List<Transfer> transfers = new ArrayList<>();
-        String sql = "SELECT transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount FROM transfer;";
+        String sql = "SELECT transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount FROM transfer WHERE account_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while (results.next()) {

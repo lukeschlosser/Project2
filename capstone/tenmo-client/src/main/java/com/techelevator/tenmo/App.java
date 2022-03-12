@@ -99,7 +99,7 @@ public class App {
         displayAccountMenu();
         System.out.println("Welcome to Your Tenmo Account " + displayUser() + ", id:" + userAsIntFromLong());
         System.out.println();
-        System.out.println("Your current account balance is: " + restAccSvcs.getBalance(userAsIntFromLong()));
+        System.out.println("Your current account balance is: $" + restAccSvcs.getBalance(currentUser));
 
 	}
 
