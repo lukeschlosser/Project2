@@ -29,7 +29,7 @@ public class UserController {
     }
 
 //    @PreAuthorize("permitAll")
-    @RequestMapping(path = "/user", method = RequestMethod.GET)
+    @RequestMapping(path = "/tenmo_user", method = RequestMethod.GET)
     public List <User> listUsernameAndId(){
             return userDao.findAllUsers();
         }

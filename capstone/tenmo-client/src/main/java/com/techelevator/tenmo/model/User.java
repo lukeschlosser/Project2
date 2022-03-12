@@ -21,6 +21,7 @@ public class User {
         this.username = username;
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other instanceof User) {

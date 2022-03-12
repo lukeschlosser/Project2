@@ -121,7 +121,7 @@ public class App {
         System.out.println("Who would you like to send TE Bucks " + displayUser() + "?");
         System.out.println("Here are the available users: ");
         System.out.println();
-        System.out.println(restUserSvcs.listUsernameAndId());
+        System.out.println(restUserSvcs.listUsernameAndId(currentUser));
         System.out.println();
         consoleService.promptForString("Please enter the userId of who you would like to send the TE Bucks: ");
         consoleService.displaySelecTransRecip();
@@ -136,7 +136,7 @@ public class App {
         System.out.println("Who would you like to request TE Bucks from " + displayUser() + "?");
         System.out.println("Here are the available users?");
         System.out.println();
-        System.out.println(restUserSvcs.listUsernameAndId());
+        System.out.println(restUserSvcs.listUsernameAndId(currentUser));
         System.out.println();
         System.out.println();
         System.out.println("************ಠ╭╮ಠ*************");
@@ -180,5 +180,7 @@ public class App {
         System.out.println("******TRANSFER*MENU******");
         System.out.println();
     }
+
+
 
 }
