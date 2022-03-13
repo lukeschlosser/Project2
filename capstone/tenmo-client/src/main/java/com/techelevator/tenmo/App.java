@@ -124,7 +124,7 @@ public class App {
         System.out.println();
         displayListUsernameAndId();
         System.out.println();
-        consoleService.promptForSendBucks();
+        consoleService.menuForSendBucks();
 	}
 
 
@@ -181,11 +181,11 @@ public class App {
 
     public void displayListUsernameAndId() {
 
-        for (User user : restUserSvcs.listUsernameAndId(currentUser)){
+        for (User user : restUserSvcs.listUsernameAndId(currentUser)) {
             System.out.println("username: " + user.getUsername() + ", account id:" + user.getId());
         }
-
-
     }
+
+
 
 }

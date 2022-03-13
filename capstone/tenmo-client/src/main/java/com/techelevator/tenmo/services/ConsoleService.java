@@ -13,6 +13,7 @@ public class ConsoleService {
     AuthenticatedUser currentUser = new AuthenticatedUser();
     User user = new User();
     RestAccountSvcs account = new RestAccountSvcs();
+    RestUserSvcs restUserSvcs;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -106,45 +107,80 @@ public class ConsoleService {
         System.out.println("You have selected username:" + selectedId + " as the recipient for this transaction.");
         System.out.println();
     }
-    public void promptForSendBucks() {
-        String transferSelection;
-        String userInputIdSelection;
+    public void menuForSendBucks() {
+        String verifySelection;
+        int selectAccountTo = -1;
+        int selectAccountFrom;
         BigDecimal userInputTransferAmount;
-        userInputIdSelection = promptForString("Please enter the userId of who you would like to send the TE Bucks: ");
+
+    while(selectAccountTo != 0){
+        selectAccountTo = promptForInt("Please enter the userId of who you would like to send the TE Bucks: ");
+        selectAccountFrom = currentUser.getUser().getId();
+
         System.out.println();
-        // if(userInputIdSelection.equals(currentUser.getUser().getId())){
-        //    System.out.println("You cannot send TE Bucks to yourself.");
-        // } else if (userInputIdSelection.equals(user.getId())) {
-        System.out.println("You have selected username:" + userInputIdSelection + " as the recipient for this transaction.");
-        System.out.println();
-        userInputTransferAmount = promptForBigDecimal("Please enter the amount of TE Bucks you would like to send: ");
-//        if(account.getBalance(currentUser.getUser().getId()) < userInputTransferAmount){
-//            System.out.println("Insufficient funds. Please try a smaller amount.");
-//        }else{ System.out.println();
-            System.out.println("You would like to send " + userInputTransferAmount + " to the user with ID = " + userInputIdSelection + ".");
-            System.out.println("If this is correct enter 'yes' to cancel this action enter 'cancel': ");
+        if(sbSelectPoint1(selectAccountTo, selectAccountFrom)){
+
+            userInputTransferAmount = promptForBigDecimal("Please enter the amount of TE Bucks you would like to send: ");
+
+            if(sbSelectPoint2(userInputTransferAmount, selectAccountTo)){
+
+            verifySelection = promptForString("If this is correct enter 'yes' to cancel this action enter 'no': ");
             System.out.println();
-            transferSelection = scanner.nextLine();
-            if (transferSelection.equalsIgnoreCase("yes")) {
-            //code for doing a transfer
-            } else if (transferSelection.equalsIgnoreCase("cancel")) {
-                System.out.println("Your send Bucks request has been canceled.");
-            } else {
-                System.out.println("Sorry that prompt is not recognized. Please try again."); //TODO take user back to "If this is correct enter 'yes...
+                if(sbSelectPoint3(verifySelection)){
+
+                    //transferMethod();
+                }
+            }
         }
     }
-//
-//        try {
-//            transferSelection = Integer.parseInt(scanner.nextLine());
-//            if (transferSelection ==  userid && transferSelection != currentUser.getId){
-//
-//            }
-//        } catch (NumberFormatException e) {
-//            transferSelection = -1;
-//        }
-//        return transferSelection;
-//    }
+    }
 
+    public boolean checkAccountToIsInList(int selectAccountTo) {
+        boolean check = false;
+
+        for (User user : restUserSvcs.listUsernameAndId(currentUser)){
+            if(user.getId() == selectAccountTo) {
+                check = true;
+            }
+        } return check;
+    }
+
+    public boolean sbSelectPoint1(int selectAccountTo, int selectAccountFrom){
+        boolean result = false;
+        if(selectAccountTo == selectAccountFrom) {
+            System.out.println("You cannot send TE Bucks to yourself.");
+        } else if (!checkAccountToIsInList(selectAccountTo)) {
+            System.out.println("Your selection is not a valid user");
+        }    else {
+            System.out.println("You have selected username: " + ", id: " + selectAccountTo + " as the recipient for this transaction."); //TODO add username
+            System.out.println();
+            result = true;
+        }   return result;
+    }
+
+    public boolean sbSelectPoint2(BigDecimal userInputTransferAmount, int selectAccountTo){
+        boolean result = false;
+        if (account.getBalance(currentUser).compareTo(userInputTransferAmount) < 0) {
+            System.out.println("Insufficient funds. Please try a smaller amount.");
+        } else if (account.getBalance(currentUser).compareTo(userInputTransferAmount) > 0) {
+                    result = true;
+                    System.out.println();
+                    System.out.println("You would like to send " + userInputTransferAmount + " to the user with ID = " + selectAccountTo + ".");
+                    System.out.println();
+            } return result;
+    }
+
+
+    public boolean sbSelectPoint3(String verifySelection){              //TODO add catch System.out.println("Sorry that prompt is not recognized. Please try again.");
+        boolean result = false;
+
+        if (verifySelection.equalsIgnoreCase("no")) {
+            System.out.println("Your send Bucks request has been canceled.");
+        } else if (verifySelection.equalsIgnoreCase("yes")) {
+            System.out.println("Your send Bucks request has been accepted.");
+            result = true;
+        } return result;
+    }
 
 
 
