@@ -32,6 +32,8 @@ public class JdbcAccountDao implements AccountDao{
     }
 
 
+
+
     @Override
     public Account getAccount(int userId) {
         Account account = null;
@@ -84,6 +86,8 @@ public class JdbcAccountDao implements AccountDao{
     }
 
 
+
+
     private Account mapRowToAccount(SqlRowSet rs) {
         Account account = new Account();
         account.setAccountId(rs.getInt("account_id"));
@@ -91,6 +95,7 @@ public class JdbcAccountDao implements AccountDao{
         account.setBalance(rs.getBigDecimal("balance"));
         return account;
     }
+
 
 
 }

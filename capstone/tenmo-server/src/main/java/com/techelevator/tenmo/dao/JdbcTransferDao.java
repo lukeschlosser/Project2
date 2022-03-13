@@ -2,8 +2,10 @@ package com.techelevator.tenmo.dao;
 
 import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.Transfer;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
@@ -90,6 +92,28 @@ public class JdbcTransferDao implements TransferDao{
         return transfer1;
 
     }
+
+
+//    @Override
+//    public boolean create(String username, String password) {                                           //TODO convert to logTransfer
+//        String sql = "INSERT INTO tenmo_user (username, password_hash) VALUES (?, ?) RETURNING user_id";
+//        String password_hash = new BCryptPasswordEncoder().encode(password);
+//        Integer newUserId;
+//        try {
+//            newUserId = jdbcTemplate.queryForObject(sql, Integer.class, username, password_hash);
+//        } catch (DataAccessException e) {
+//            return false;
+//        }
+//
+//        sql = "INSERT INTO account (user_id, balance) values(?, ?)";
+//        try {
+//            jdbcTemplate.update(sql, newUserId, STARTING_BALANCE);
+//        } catch (DataAccessException e) {
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
 
     private Transfer mapRowToTransfer(SqlRowSet rs){
