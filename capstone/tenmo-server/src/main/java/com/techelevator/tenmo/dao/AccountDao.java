@@ -17,4 +17,7 @@ public interface AccountDao {
 
     Account getBalance(int accountId);
 
+    void updateAccFrom(BigDecimal newBalance, int accountFrom);
+
+    void updateAccTo(BigDecimal newBalance, int accountTo);
 }

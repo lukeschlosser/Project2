@@ -85,6 +85,19 @@ public class JdbcAccountDao implements AccountDao{
         return accounts;
     }
 
+    @Override
+    public void updateAccFrom(BigDecimal newBalance, int accountFrom){
+        String sql = "UPDATE account AS a SET a.balance = ? JOIN transfer AS t ON a.account_id = t.account_from WHERE t.account_from = ?;";
+        jdbcTemplate.update(sql, newBalance, accountFrom);
+    }
+
+
+    @Override
+    public void updateAccTo(BigDecimal newBalance, int accountTo){
+        String sql = "UPDATE account AS a SET a.balance = ? JOIN transfer AS t ON a.account_id = t.account_to WHERE t.account_to = ?;";
+        jdbcTemplate.update(sql, newBalance, accountTo);
+    }
+
 
 
 

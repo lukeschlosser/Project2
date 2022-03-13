@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 
 @RestController
 //@PreAuthorize(("isAuthenticated()"))
@@ -28,11 +30,19 @@ public class AccountController {
         this.transferDao = transferDao;
     }
 
-//  @PreAuthorize("permitAll")                                                                       //TODO Principal principal research
-    @RequestMapping( path = "/account/balance/{id}", method = RequestMethod.GET)
-    public Account getBalance(@PathVariable("id") int userId){                                       //TODO add exception
+    //  @PreAuthorize("permitAll")
+    @RequestMapping(path = "/account/balance/{id}", method = RequestMethod.GET)
+    public Account getBalance(@PathVariable("id") int userId) {
         return accountDao.getBalance(userId);
     }
 
+    @RequestMapping(path = "/account/balance/{id}", method = RequestMethod.POST)
+    public void updateAccFrom(@PathVariable("balance") BigDecimal newBalance, @PathVariable("id") int accountFrom) {
+        accountDao.updateAccFrom(newBalance, accountFrom);
+    }
 
+    @RequestMapping(path = "/account/balance/{id}", method = RequestMethod.POST)
+    public void updateAccTo(@PathVariable("balance") BigDecimal newBalance, @PathVariable("id") int accountTo) {
+        accountDao.updateAccTo(newBalance, accountTo);
+    }
 }
