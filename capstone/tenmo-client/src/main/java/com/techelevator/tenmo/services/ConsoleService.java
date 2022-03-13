@@ -1,6 +1,7 @@
 package com.techelevator.tenmo.services;
 
-
+import com.techelevator.tenmo.services.AuthenticationService;
+import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.model.UserCredentials;
 import java.math.BigDecimal;
@@ -9,6 +10,9 @@ import java.util.Scanner;
 
 public class ConsoleService {
 
+    AuthenticatedUser currentUser = new AuthenticatedUser();
+    User user = new User();
+    RestAccountSvcs account = new RestAccountSvcs();
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -95,18 +99,56 @@ public class ConsoleService {
         System.out.println("An error occurred. Check the log for details.");
     }
 
-    public void displaySelecTransRecip(){                              //TODO OPTION 4 replace N/A with getUserFromTranferId(nextline())
+    public void displaySelecTransRecip(){
         String selectedId = scanner.nextLine();
 
-//        for (User user : restUserSvcs.listUsernameAndId(currentUser)){
-//        if (selectedId == user.getId()){
-//
-//        }
-//        }
         System.out.println();
         System.out.println("You have selected username:" + selectedId + " as the recipient for this transaction.");
         System.out.println();
     }
+    public void promptForSendBucks() {
+        String transferSelection;
+        String userInputIdSelection;
+        BigDecimal userInputTransferAmount;
+        userInputIdSelection = promptForString("Please enter the userId of who you would like to send the TE Bucks: ");
+        System.out.println();
+        // if(userInputIdSelection.equals(currentUser.getUser().getId())){
+        //    System.out.println("You cannot send TE Bucks to yourself.");
+        // } else if (userInputIdSelection.equals(user.getId())) {
+        System.out.println("You have selected username:" + userInputIdSelection + " as the recipient for this transaction.");
+        System.out.println();
+        userInputTransferAmount = promptForBigDecimal("Please enter the amount of TE Bucks you would like to send: ");
+//        if(account.getBalance(currentUser.getUser().getId()) < userInputTransferAmount){
+//            System.out.println("Insufficient funds. Please try a smaller amount.");
+//        }else{ System.out.println();
+            System.out.println("You would like to send " + userInputTransferAmount + " to the user with ID = " + userInputIdSelection + ".");
+            System.out.println("If this is correct enter 'yes' to cancel this action enter 'cancel': ");
+            System.out.println();
+            transferSelection = scanner.nextLine();
+            if (transferSelection.equalsIgnoreCase("yes")) {
+            //code for doing a transfer
+            } else if (transferSelection.equalsIgnoreCase("cancel")) {
+                System.out.println("Your send Bucks request has been canceled.");
+            } else {
+                System.out.println("Sorry that prompt is not recognized. Please try again."); //TODO take user back to "If this is correct enter 'yes...
+        }
+    }
+//
+//        try {
+//            transferSelection = Integer.parseInt(scanner.nextLine());
+//            if (transferSelection ==  userid && transferSelection != currentUser.getId){
+//
+//            }
+//        } catch (NumberFormatException e) {
+//            transferSelection = -1;
+//        }
+//        return transferSelection;
+//    }
+
+
 
 
     }
+
+
+

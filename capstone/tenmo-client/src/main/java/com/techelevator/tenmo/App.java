@@ -123,12 +123,8 @@ public class App {
         System.out.println("Here are the available users: ");
         System.out.println();
         displayListUsernameAndId();
-//        System.out.println(restUserSvcs.listUsernameAndId(currentUser));
         System.out.println();
-        consoleService.promptForString("Please enter the userId of who you would like to send the TE Bucks: ");
-        consoleService.displaySelecTransRecip();
-        consoleService.promptForBigDecimal("Please enter the amount of TE Bucks you would like to send: ");
-
+        consoleService.promptForSendBucks();
 	}
 
 
