@@ -5,8 +5,6 @@ import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.*;
 
-import java.math.BigDecimal;
-
 public class App {
 
     private static final String API_BASE_URL = "http://localhost:8080/";
@@ -96,7 +94,7 @@ public class App {
     }
 
 
-	private void viewCurrentBalance() {                                      //current balance method still shows as null
+	private void viewCurrentBalance() {
         displayAccountMenu();
         System.out.println("Welcome to Your Tenmo Account " + displayUser() + ", id:" + userAsIntFromLong());
         System.out.println();
@@ -105,13 +103,13 @@ public class App {
 	}
 
 
-	private void viewTransferHistory() {                             //TODO given userId return list of transfer history
+	private void viewTransferHistory() {
         displayTransferMenu();
         System.out.println("Your Transfer History: " + restTransferSvcs.getTransferHistory(userAsIntFromLong()));
     }
 
 
-	private void viewPendingRequests() {                        // TODO Auto-generated method stub getTransferStatusByUserId
+	private void viewPendingRequests() {
         displayTransferMenu();
         System.out.println("Your pending requests: ");
 	}
@@ -128,7 +126,6 @@ public class App {
 	}
 
 
-// BONUS
 	private void requestBucks() {
         displayTransferMenu();
         System.out.println("Who would you like to request TE Bucks from " + displayUser() + "?");

@@ -1,11 +1,10 @@
 package com.techelevator.tenmo.dao;
 
-import com.techelevator.tenmo.model.Account;
+
 import com.techelevator.tenmo.model.Transfer;
-import org.springframework.dao.DataAccessException;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
@@ -16,10 +15,10 @@ import java.util.List;
 public class JdbcTransferDao implements TransferDao{
 
     private JdbcTemplate jdbcTemplate;
-                                                                                          //TODO transfer_type_id
+
     private static final int REQUEST = 1;
     private static final int SEND = 2;
-                                                                                          //TODO transfer_status_id
+
     private static final int PENDING = 1;
     private static final int APPROVED = 2;
     private static final int REJECTED = 3;
@@ -94,28 +93,6 @@ public class JdbcTransferDao implements TransferDao{
     }
 
 
-//    @Override
-//    public boolean create(String username, String password) {                                           //TODO convert to logTransfer
-//        String sql = "INSERT INTO tenmo_user (username, password_hash) VALUES (?, ?) RETURNING user_id";
-//        String password_hash = new BCryptPasswordEncoder().encode(password);
-//        Integer newUserId;
-//        try {
-//            newUserId = jdbcTemplate.queryForObject(sql, Integer.class, username, password_hash);
-//        } catch (DataAccessException e) {
-//            return false;
-//        }
-//
-//        sql = "INSERT INTO account (user_id, balance) values(?, ?)";
-//        try {
-//            jdbcTemplate.update(sql, newUserId, STARTING_BALANCE);
-//        } catch (DataAccessException e) {
-//            return false;
-//        }
-//
-//        return true;
-//    }
-
-
     private Transfer mapRowToTransfer(SqlRowSet rs){
         Transfer transfer = new Transfer();
         transfer.setTransferId(rs.getInt("transfer_id"));
@@ -128,4 +105,3 @@ public class JdbcTransferDao implements TransferDao{
     }
 
 }
-//TODO make sure balance is > transferAmt   && Can't transfer to yourself

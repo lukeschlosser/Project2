@@ -2,13 +2,11 @@ package com.techelevator.tenmo.services;
 
 import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.AuthenticatedUser;
-import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.util.BasicLogger;
 import org.springframework.http.*;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
-
 import java.math.BigDecimal;
 
 
@@ -60,7 +58,7 @@ public class RestAccountSvcs implements AccountSvcs {
         boolean result = false;
 
         try {
-            restTemplate.put(API_BASE_URL + "/account/" + newAccount.getAccountId(), entity);
+            restTemplate.put(API_BASE_URL + "/account/balance/{id}" + newAccount.getAccountId(), entity);
             result = true;
         } catch (RestClientResponseException rcre) {
             BasicLogger.log(rcre.getRawStatusCode() + " : " + rcre.getStatusText() );

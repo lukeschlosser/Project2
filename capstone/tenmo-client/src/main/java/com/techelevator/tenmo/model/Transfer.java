@@ -8,10 +8,9 @@ import java.math.BigDecimal;
 
 public class Transfer {
 
-    //transfer_type_id
     private static final int REQUEST = 1;
     private static final int SEND = 2;
-    //transfer_status_id
+
     private static final int PENDING = 1;
     private static final int APPROVED = 2;
     private static final int REJECTED = 3;

@@ -1,12 +1,8 @@
 package com.techelevator.tenmo.services;
 
-import com.techelevator.tenmo.services.AuthenticationService;
-import com.techelevator.tenmo.model.AuthenticatedUser;
-import com.techelevator.tenmo.model.User;
-import com.techelevator.tenmo.model.UserCredentials;
+import com.techelevator.tenmo.model.*;
 import java.math.BigDecimal;
 import java.util.Scanner;
-
 
 public class ConsoleService {
 
@@ -14,6 +10,8 @@ public class ConsoleService {
     User user = new User();
     RestAccountSvcs account = new RestAccountSvcs();
     RestUserSvcs restUserSvcs;
+    RestAccountSvcs restAccountSvcs;
+    RestTransferSvcs restTransferSvcs;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -107,7 +105,7 @@ public class ConsoleService {
         System.out.println("You have selected username:" + selectedId + " as the recipient for this transaction.");
         System.out.println();
     }
-    public void menuForSendBucks() {
+    public void menuForSendBucks(){
         String verifySelection;
         int selectAccountTo = -1;
         int selectAccountFrom;
@@ -127,8 +125,10 @@ public class ConsoleService {
             verifySelection = promptForString("If this is correct enter 'yes' to cancel this action enter 'no': ");
             System.out.println();
                 if(sbSelectPoint3(verifySelection)){
-
-                    //transferMethod();
+                    Transfer transfer = new Transfer();
+                    Account account = new Account();
+                    restTransferSvcs.createTransfer(transfer);                          //TODO connect Rest services
+                    restAccountSvcs.updateAccount(account);
                 }
             }
         }
@@ -145,7 +145,7 @@ public class ConsoleService {
         } return check;
     }
 
-    public boolean sbSelectPoint1(int selectAccountTo, int selectAccountFrom){
+    public boolean sbSelectPoint1(int selectAccountTo, int selectAccountFrom) {
         boolean result = false;
         if(selectAccountTo == selectAccountFrom) {
             System.out.println("You cannot send TE Bucks to yourself.");

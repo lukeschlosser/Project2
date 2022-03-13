@@ -9,12 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
+
 public class RestTransferSvcs implements TransferSvcs {
 
     private static final String API_BASE_URL = "http://localhost:8080";
@@ -33,7 +31,7 @@ public class RestTransferSvcs implements TransferSvcs {
     }
 
     @Override
-    public List<Transfer> getTransferHistory(int transferId){                                               //TODO change to [] if fails
+    public List<Transfer> getTransferHistory(int transferId){
         List<Transfer> transfers = new ArrayList<>();
 
         try {
